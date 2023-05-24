@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "windows_server" {
-  ami                    = var.windows_ami
+  ami                    = data.aws_ami.windows-2022.id
   instance_type          = var.instance_type
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet.id
@@ -36,7 +36,7 @@ resource "aws_instance" "windows_server" {
 }
 
 resource "aws_instance" "suse_server" {
-  ami                    = var.suse_ami
+  ami                    = data.aws_ami.suse-server.id
   instance_type          = var.instance_type
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet.id
