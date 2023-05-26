@@ -24,6 +24,7 @@ resource "aws_instance" "windows_server" {
   subnet_id              = aws_subnet.subnet.id
   vpc_security_group_ids = [aws_security_group.security_group.id]
   private_ip             = var.windows_server_ip
+  associate_public_ip_address = true
   root_block_device {
     volume_type = var.volume_type
     volume_size = var.volume_size_win
@@ -42,6 +43,7 @@ resource "aws_instance" "suse_server" {
   subnet_id              = aws_subnet.subnet.id
   vpc_security_group_ids     = [aws_security_group.security_group.id]
   private_ip             = var.suse_server_ip
+  associate_public_ip_address = true
   root_block_device {
     volume_type = var.volume_type
     volume_size = var.volume_size_suse
