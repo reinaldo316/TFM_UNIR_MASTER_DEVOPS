@@ -1,6 +1,4 @@
 terraform {
-
-#configuración de restricciones de versión para el proveedor 
   required_providers {
     aws = {
     source  = "hashicorp/aws"
