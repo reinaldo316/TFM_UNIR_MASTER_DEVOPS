@@ -17,3 +17,5 @@ data "aws_ami" "windows-2022" {
     values = ["Windows_Server-2022-English-Full-Base*"]
   }
 }
+
+

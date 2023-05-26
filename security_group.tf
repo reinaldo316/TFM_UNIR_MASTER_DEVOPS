@@ -1,6 +1,8 @@
 resource "aws_security_group" "security_group" {
   name        = "SAP_B1_SG"
   description = "Grupo de seguridad para SAP B1"
+  vpc_id = aws_vpc.vpc.id
+
 
   ingress {
     from_port   = 22
