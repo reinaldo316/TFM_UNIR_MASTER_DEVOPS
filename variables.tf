@@ -36,8 +36,6 @@ variable "volume_size_suse" {
   default     = "35"
 }
 
-# Application definition
-
 variable "app_name" {
   type        = string
   description = "Application name"
