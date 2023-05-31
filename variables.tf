@@ -48,16 +48,6 @@ variable "app_environment" {
   description = "Application environment"
 }
 
-variable "windows_ami" { 
-  description = "ID de la AMI para Windows Server 2019"
-  default     = "ami-0123456789abcdef0"
-}
-
-variable "suse_ami" {
-  description = "ID de la AMI para SUSE Linux Server 2022"
-  default     = "ami-0123456789abcdef0"
-}
-
 variable "windows_server_ip" {
   description = "Dirección IP para el servidor Windows Server"
   default     = "10.0.0.10"
