@@ -11,7 +11,7 @@ func TestInfrastructure(t *testing.T) {
 	t.Parallel()
 
 	// Directorio del módulo Terraform
-	terraformDir := "./"
+	terraformDir := "/home/reinaldo316/Desktop/TFM_UNIR_MASTER_DEVOPS"
 
 	// Variables para la prueba
 	awsRegion := "us-west-2"

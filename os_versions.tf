@@ -4,7 +4,11 @@ data "aws_ami" "suse-server" {
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["suse-sles-15-sp3-v*"]
+    values = ["suse-sles-sap-15-sp3-*"]
+  }
+    filter {
+    name   = "architecture"
+    values = ["x86_64"]
   }
 }
 

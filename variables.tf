@@ -16,7 +16,7 @@ variable "instance_type_win" {
 #varible que contiene el tipo de instancia de AWS
 variable "instance_type_suse" {
   description = "tipo de instancia para ec2"
-  default   =  "m6g.medium"
+  default   =  "t2.large"
 }
 
 variable "volume_type" {
