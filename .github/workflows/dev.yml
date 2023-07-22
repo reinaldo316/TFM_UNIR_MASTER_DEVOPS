@@ -4,10 +4,6 @@
 name: CI / CD DEVOPS Development
 
 on:
-  workflow_run:
-    branches: [feature/*]
-    types:
-      - completed
   push:
     branches: [ feature/* ]
 jobs:
