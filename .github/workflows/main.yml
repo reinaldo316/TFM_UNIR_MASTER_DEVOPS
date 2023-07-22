@@ -84,6 +84,8 @@ jobs:
       run: terraform apply -auto-approve
   semver:
     runs-on: ubuntu-latest
+    permissions:  
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -92,7 +94,7 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0
         with:
-          versionSpec: '6.x'
+          versionSpec: '5.x'
           preferLatestVersion: true
       - name: Determine Version
         uses: gittools/actions/gitversion/execute@v0
@@ -104,5 +106,3 @@ jobs:
           git tag $GITVERSION_SEMVER
       - name: Push git tag
         run: git push origin $GITVERSION_SEMVER
-
-
