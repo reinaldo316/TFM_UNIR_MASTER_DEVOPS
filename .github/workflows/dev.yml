@@ -19,6 +19,7 @@ jobs:
         soft_fail: true
   COSTOS:
     name: Costo
+    needs: SEGURIDAD
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -30,6 +31,7 @@ jobs:
       run: infracost breakdown --path=.
   TERRFORM_VALIDATE_PLAN:
     name: Terraform validacion y terrform plan
+    needs: [SEGURIDAD, COSTOS]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
