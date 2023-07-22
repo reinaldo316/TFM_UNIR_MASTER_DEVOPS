@@ -54,10 +54,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: trstringer/manual-approval@v1
+      timeout-minutes: ${{ vars.APROVAL_TIMEOUT_MINUTES}}
       with:
         secret: ${{ secrets.GH_TOKEN }}
         approvers: ${{ vars.APPROVALS }}
-        minimum-approvals: 1
+        minimum-approvals: ${{vars.APROVAL_MIN_NUMBER}}
         issue-title: ${{ vars.ISSUE_TITLE }}
         issue-body: ${{ vars.ISSUE_BODY}}
         exclude-workflow-initiator-as-approver: false
@@ -83,6 +84,8 @@ jobs:
     - name: terraform apply 
       run: terraform apply -auto-approve
   semver:
+    name : Creacion tag
+    needs: TERRFORM_APPLY
     runs-on: ubuntu-latest
     permissions:  
       contents: write
