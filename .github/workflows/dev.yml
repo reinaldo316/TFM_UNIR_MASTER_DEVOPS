@@ -27,7 +27,7 @@ jobs:
       with:
         api-key: ${{ secrets.INFRACOST_API_KEY }}
     - name: generate infracost estimate
-      uses: infracost breakdown --path=.
+      run: infracost breakdown --path=.
   TERRFORM_PLAN:
     runs-on: ubuntu-latest
     steps:
