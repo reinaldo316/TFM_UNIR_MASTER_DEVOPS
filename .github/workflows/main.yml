@@ -80,7 +80,7 @@ jobs:
         aws-region: us-east-1
     - name: terraform init
       run: terraform init
-    - name: terraform apply
-      run: terraform apply
+    - name: terraform apply 
+      run: terraform apply -auto-approve
 
 
