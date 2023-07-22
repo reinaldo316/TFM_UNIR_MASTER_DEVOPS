@@ -4,9 +4,13 @@
 name: CI / CD DEVOPS Development
 
 on:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+  workflow_run:
+    workflows: ["CI / CD DEVOPS Development"]
+    branches: [main]
+    types:
+      - completed
+  push:
+    branches: [ main ]
 jobs:
   BUILD:
     runs-on: ubuntu-latest
