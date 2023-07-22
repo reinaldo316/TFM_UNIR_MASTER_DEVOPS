@@ -29,6 +29,7 @@ jobs:
     - name: generate infracost estimate
       run: infracost breakdown --path=.
   TERRFORM_VALIDATE_PLAN:
+    name: Terraform validacion y terrform plan
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
