@@ -35,14 +35,6 @@ output "volume_size_suse" {
   value = var.volume_size_suse
 }
 
-output "app_name" {
-  value = var.app_name
-}
-
-output "app_environment" {
-  value = var.app_environment
-}
-
 output "windows_server_ip" {
   value = var.windows_server_ip
 }
@@ -81,4 +73,8 @@ output "windows_server_instance_id" {
 
 output "suse_server_instance_id" {
   value = aws_instance.suse_server.id
+}
+
+output "variable_key-pair" {
+  value = random_pet.my_name.id
 }
