@@ -7,11 +7,48 @@ on:
   push:
     branches: [ feature/* ]
 jobs:
-  BUILD:
+  SEGURIDAD:
+    name: Seguridad
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
+    - name: clone repo
+      uses: actions/checkout@v3
+    - name: tfsec
+      uses: aquasecurity/tfsec-action@v1.0.3
       with:
-        java-version: 11
+        soft_fail: true
+  COSTOS:
+    name: Costo
+    needs: SEGURIDAD
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Infracost-setup
+      uses: infracost/actions/setup@v2
+      with:
+        api-key: ${{ secrets.INFRACOST_API_KEY }}
+    - name: generate infracost estimate
+      run: infracost breakdown --path=.
+  TERRFORM_VALIDATE_PLAN:
+    name: Terraform validacion y terrform plan
+    needs: [SEGURIDAD, COSTOS]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Instalar terraform
+      uses: hashicorp/setup-terraform@v2
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with: 
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: us-east-1
+    - name: terraform init
+      run: terraform init
+    - name: terraform validate
+      run: terraform validate
+    - name: terraform plan
+      run: terraform plan
+        
+

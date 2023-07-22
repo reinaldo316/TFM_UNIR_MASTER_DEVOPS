@@ -36,15 +36,6 @@ variable "volume_size_suse" {
   default     = "35"
 }
 
-variable "app_name" {
-  type        = string
-  description = "Application name"
-}
-
-variable "app_environment" {
-  type        = string
-  description = "Application environment"
-}
 
 variable "windows_server_ip" {
   description = "Dirección IP para el servidor Windows Server"

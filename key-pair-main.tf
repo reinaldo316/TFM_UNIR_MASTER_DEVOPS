@@ -5,9 +5,13 @@ resource "tls_private_key" "key_pair" {
   rsa_bits  = 4096
 }
 
+resource "random_pet" "my_name" {
+  length = 10
+}
+
 # crea un par de claves en AWS utilizando el nombre especificado
 resource "aws_key_pair" "key_pair" {
-  key_name   = "${lower(var.app_name)}-${lower(var.app_environment)}-windows-${lower(var.aws_region)}"  
+  key_name   = "${random_pet.my_name.id}-windows-${lower(var.aws_region)}"  
   public_key = tls_private_key.key_pair.public_key_openssh
 }
 

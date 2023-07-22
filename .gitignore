@@ -32,3 +32,5 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+./terraform-prueba-windows-us-east-1.pem
+terraform-prueba-windows-us-east-1.pem
