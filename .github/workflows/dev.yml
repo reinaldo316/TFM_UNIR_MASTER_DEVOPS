@@ -20,8 +20,6 @@ jobs:
   COSTOS:
     name: Costo
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
     - uses: actions/checkout@v2
     - name: Infracost-setup
@@ -29,7 +27,7 @@ jobs:
       with:
         api-key: ${{ secrets.INFRACOST_API_KEY }}
     - name: generate infracost estimate
-      uses: infracost breakdown --path=. --format=json --out-file=/tmp/infracost-base.json
+      uses: infracost breakdown --path=.
   TERRFORM_PLAN:
     runs-on: ubuntu-latest
     steps:
