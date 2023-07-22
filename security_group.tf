@@ -3,7 +3,7 @@ resource "aws_security_group" "security_group" {
   description = "Grupo de seguridad para SAP B1"
   vpc_id = aws_vpc.vpc.id
 
-
+ssh-keygen -t ed25519 -C "reinaldo316@gmail.com"
   ingress {
     from_port   = 22
     to_port     = 22
