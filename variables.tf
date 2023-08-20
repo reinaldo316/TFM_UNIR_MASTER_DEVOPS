@@ -8,6 +8,11 @@ variable "aws_region" {
   description = "Region AWS para despliegue de una instancia"
   default   = "us-east-1"
 }
+#varible que contiene la zina de disponibilidad
+variable "availability_zone" {
+  type = string
+  default = "us-east-1a"
+}
 #varible que contiene el tipo de instancia de AWS
 variable "instance_type_win" {
   description = "tipo de instancia para ec2"
@@ -33,7 +38,7 @@ variable "volume_size_win" {
 variable "volume_size_suse" {
   description = "Tamaño del volumen"
   type        = string
-  default     = "35"
+  default     = "300"
 }
 
 

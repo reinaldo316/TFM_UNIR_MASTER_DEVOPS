@@ -35,21 +35,24 @@ output "volume_size_suse" {
   value = var.volume_size_suse
 }
 
-output "windows_server_ip" {
-  value = var.windows_server_ip
+
+
+output "security_group_name_suse" {
+  value = aws_security_group.security_group_suse.name
 }
 
-output "suse_server_ip" {
-  value = var.suse_server_ip
+output "security_group_description_suse" {
+  value = aws_security_group.security_group_suse.description
 }
 
-output "security_group_name" {
-  value = aws_security_group.security_group.name
+output "security_group_name_winserv" {
+  value = aws_security_group.security_group_winserv.name
 }
 
-output "security_group_description" {
-  value = aws_security_group.security_group.description
+output "security_group_description_winserv" {
+  value = aws_security_group.security_group_winserv.description
 }
+
 
 output "ami_suse_server" {
   value = data.aws_ami.suse-server.id
@@ -63,8 +66,11 @@ output "vpc_id" {
   value = aws_vpc.vpc.id
 }
 
-output "subnet_id" {
-  value = aws_subnet.subnet.id
+output "subnet_id_suse" {
+  value = aws_subnet.subnet_suse.id
+}
+output "subnet_id_winserv" {
+  value = aws_subnet.subnet_windows.id
 }
 
 output "windows_server_instance_id" {
