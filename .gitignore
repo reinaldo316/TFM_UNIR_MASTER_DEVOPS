@@ -34,3 +34,6 @@ override.tf.json
 terraform.rc
 ./terraform-prueba-windows-us-east-1.pem
 terraform-prueba-windows-us-east-1.pem
+.terraform.lock.hcl
+optionally-radically-hugely-locally-similarly-thoroughly-arguably-ideally-clear-lamprey-windows-us-east-1.pem
+.terraform.lock.hcl
