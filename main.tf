@@ -38,6 +38,19 @@ resource "aws_instance" "windows_server" {
     volume_size = var.volume_size_win
     delete_on_termination = false
      }
+     user_data = <<EOF
+        powershell -command "
+
+        # Install the Windows Server graphical interface
+        Install-WindowsFeature Server-Gui-Mgmt-Tools
+
+        # Create the SAP user with the SAP password
+        New-LocalUser sap -Password (ConvertTo-SecureString -String sap -AsPlainText -Force)
+
+        # Log out of the current session and open a new session with the SAP user
+        Exit"
+      EOF
+
     tags = {
     "Name" = "WIN Server"
   }
