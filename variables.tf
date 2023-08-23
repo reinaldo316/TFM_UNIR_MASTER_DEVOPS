@@ -1,53 +1,53 @@
-#varible que contiene el perfil de usuario default de AWS
+# Variable que contiene el perfil de usuario default de AWS
 variable "aws_profile_name" {
-  description = "perfil de AWS"
+  description = "Perfil de AWS"
   default     = "default"
 }
-#varible que contiene la region default de AWS
+
+# Variable que contiene la región default de AWS
 variable "aws_region" {
-  description = "Region AWS para despliegue de una instancia"
+  description = "Región AWS para despliegue de una instancia"
   default   = "us-east-1"
 }
-#varible que contiene la zina de disponibilidad
+
+# Variable que contiene la zona de disponibilidad
 variable "availability_zone" {
   type = string
   default = "us-east-1a"
 }
-#varible que contiene el tipo de instancia de AWS
+
+# Variable que contiene el tipo de instancia de AWS para Windows
 variable "instance_type_win" {
-  description = "tipo de instancia para ec2"
+  description = "Tipo de instancia para EC2 (Windows)"
   default   =  "t2.micro"
 }
-#varible que contiene el tipo de instancia de AWS
+
+# Variable que contiene el tipo de instancia de AWS para SUSE
 variable "instance_type_suse" {
-  description = "tipo de instancia para ec2"
+  description = "Tipo de instancia para EC2 (SUSE)"
   default   =  "t2.large"
 }
 
+# Variable que contiene el tipo de volumen para EBS
 variable "volume_type" {
-  description = "Tipo de volumen"
+  description = "Tipo de volumen para EBS"
   type        = string
   default     = "gp2"
 }
 
+# Variable que contiene el tamaño del volumen para Windows
 variable "volume_size_win" {
-  description = "Tamaño del volumen"
+  description = "Tamaño del volumen para Windows"
   type        = string
   default     = "35"
 }
+
+# Variable que contiene el tamaño del volumen para SUSE
 variable "volume_size_suse" {
-  description = "Tamaño del volumen"
+  description = "Tamaño del volumen para SUSE"
   type        = string
   default     = "300"
 }
 
 
-variable "windows_server_ip" {
-  description = "Dirección IP para el servidor Windows Server"
-  default     = "10.0.0.10"
-}
 
-variable "suse_server_ip" {
-  description = "Dirección IP para el servidor SUSE Server"
-  default     = "10.0.0.11"
-}
