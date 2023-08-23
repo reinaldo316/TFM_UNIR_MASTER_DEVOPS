@@ -64,6 +64,7 @@ resource "aws_security_group" "security_group_suse" {
     description = "Allow custom port 40000"
   }
 
+
   # Regla de entrada permitida para RDP (puerto 3389)
   ingress {
     from_port   = 3389
@@ -98,16 +99,8 @@ resource "aws_security_group" "security_group_winserv" {
     description = "Allow SSH traffic"
   }
 
-  # Reglas de entrada permitidas para un puerto específico (8100)
-  ingress {
-    from_port   = 8100
-    to_port     = 8100
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
-    description = "Allow custom port 8100"
-  }
 
-  # Resto de las reglas de entrada para puertos específicos
+  # Resto de las reglas de entrada para puertos específicos de uso se SAP B1
   ingress {
     from_port   = 30000
     to_port     = 30000
@@ -138,6 +131,23 @@ resource "aws_security_group" "security_group_winserv" {
     protocol    = "tcp"
     cidr_blocks = ["10.0.0.0/16"]
     description = "Allow custom port 40000"
+  }
+  
+  ingress {
+    from_port   = 8100
+    to_port     = 8100
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+    description = "Allow custom port 8100"
+  }
+
+  
+    ingress {
+    from_port   = 8443
+    to_port     = 8443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+    description = "Allow custom port 8443"
   }
 
   # Regla de entrada permitida para RDP (puerto 3389) desde cualquier IP (0.0.0.0/0)

@@ -1,10 +1,14 @@
 
+# Definición de una VPC con un bloque CIDR de 10.0.0.0/16
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
 }
 
+# Definición de un registro de flujo en la VPC creada anteriormente
 resource "aws_flow_log" "vpc_flow_log" {
+  # Dependencia en la VPC, asegurando que el registro de flujo se crea después de la VPC
   depends_on = [aws_vpc.vpc]
+}
 
   # Log Destination ARN con interpolación correcta
   log_destination = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:destination-prefix"
@@ -22,7 +26,7 @@ resource "aws_internet_gateway" "internet_gateway" {
 resource "aws_subnet" "subnet_suse" {
   vpc_id     = aws_vpc.vpc.id
   cidr_block = "10.0.1.0/24"
-  availability_zone = "us-east-1a"
+  availability_zone = var.availability_zone
 }
 
 # Creación de una subred para Windows Server con la Zona de Disponibilidad definida por una variable
