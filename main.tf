@@ -24,8 +24,7 @@ resource "aws_instance" "windows_server" {
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet_windows.id
   vpc_security_group_ids = [aws_security_group.security_group_winserv.id]
-  associate_public_ip_address = true
-  
+
   root_block_device {
     volume_type           = var.volume_type
     volume_size           = var.volume_size_win
