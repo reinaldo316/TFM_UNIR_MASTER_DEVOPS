@@ -16,6 +16,8 @@ provider "aws" {
   profile = var.aws_profile_name
 }
 
+data "aws_caller_identity" "current" {}
+
 # Recurso para crear una instancia de Windows Server
 resource "aws_instance" "windows_server" {
   ami                    = data.aws_ami.windows-2022.id
@@ -24,7 +26,10 @@ resource "aws_instance" "windows_server" {
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet_windows.id
   vpc_security_group_ids = [aws_security_group.security_group_winserv.id]
-
+ #Esta opción se aplica a las instancias EC2 y controla cómo se manejan los tokens de acceso HTTP al acceder a los metadatos de la instancia.
+  metadata_options {
+    http_tokens = "required"
+  } 
   root_block_device {
     volume_type           = var.volume_type
     volume_size           = var.volume_size_win
@@ -52,7 +57,10 @@ resource "aws_instance" "suse_server" {
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet_suse.id
   vpc_security_group_ids = [aws_security_group.security_group_suse.id]
-  
+  #Esta opción se aplica a las instancias EC2 y controla cómo se manejan los tokens de acceso HTTP al acceder a los metadatos de la instancia.
+   metadata_options {
+    http_tokens = "required"
+  } 
   root_block_device {
     volume_type           = var.volume_type
     volume_size           = var.volume_size_suse

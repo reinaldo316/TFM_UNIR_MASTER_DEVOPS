@@ -1,16 +1,16 @@
 
-# Definición de la VPC
 resource "aws_vpc" "vpc" {
   cidr_block = "10.0.0.0/16"
 }
 
-# Definición de los registros de flujo para la VPC
 resource "aws_flow_log" "vpc_flow_log" {
   depends_on = [aws_vpc.vpc]
 
-  log_destination = "arn:aws:logs:${var.aws_region}:${aws_caller_identity.current.account_id}:destination-prefix"
-  traffic_type    = "ALL"
-  vpc_id          = aws_vpc.vpc.id
+  # Log Destination ARN con interpolación correcta
+  log_destination = "arn:aws:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:destination-prefix"
+  
+  traffic_type = "ALL"
+  vpc_id       = aws_vpc.vpc.id
 }
 
 # Creación de un Internet Gateway y asociación con la VPC creada
