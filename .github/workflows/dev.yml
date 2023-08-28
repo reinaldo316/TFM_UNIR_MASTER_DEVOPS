@@ -38,18 +38,18 @@ jobs:
     - uses: actions/checkout@v3
     - name: Instalar terraform
       uses: hashicorp/setup-terraform@v2
-    - name: Download Go Modules
-      working-directory: tfmtest/test
-      run: go mod download
-    - name: Run Go Tests
-      working-directory: tfmtest/test
-      run: go test -v -tags=unit
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with: 
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
+    - name: Download Go Modules
+      working-directory: tfmtest/test
+      run: go mod download
+    - name: Run Go Tests
+      working-directory: tfmtest/test
+      run: go test -v
 
   TERRFORM_VALIDATE_PLAN:
     name: Terraform validacion y terrform plan
