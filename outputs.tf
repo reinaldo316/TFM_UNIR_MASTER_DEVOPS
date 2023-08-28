@@ -67,6 +67,15 @@ output "security_group_description_winserv" {
   value = aws_security_group.security_group_winserv.description
 }
 
+output "security_group_suse_ingress_rules" {
+  value = aws_security_group.security_group_suse.ingress
+}
+
+output "security_group_winserv_ingress_rules" {
+  value = aws_security_group.security_group_winserv.ingress
+}
+
+
 # Salidas para IDs de recursos creados
 
 # ID de la AMI de SUSE Server
@@ -79,19 +88,28 @@ output "ami_windows_2022" {
   value = data.aws_ami.windows-2022.id
 }
 
-# ID de la VPC creada
 output "vpc_id" {
   value = aws_vpc.vpc.id
 }
 
-# ID de la subred de SUSE
+output "internet_gateway_id" {
+  value = aws_internet_gateway.internet_gateway.id
+}
+
 output "subnet_id_suse" {
   value = aws_subnet.subnet_suse.id
 }
 
-# ID de la subred de Windows Server
 output "subnet_id_winserv" {
   value = aws_subnet.subnet_windows.id
+}
+
+output "route_table_suse_id" {
+  value = aws_route_table.route_table_suse.id
+}
+
+output "route_table_windows_id" {
+  value = aws_route_table.route_table_windows.id
 }
 
 # ID de la instancia de Windows Server
@@ -107,4 +125,12 @@ output "suse_server_instance_id" {
 # Salida de la variable generada "variable_key-pair"
 output "variable_key-pair" {
   value = random_pet.my_name.id
+}
+
+output "ami_id_suse_server" {
+  value = data.aws_ami.suse-server.id
+}
+
+output "ami_id_windows_2022" {
+  value = data.aws_ami.windows-2022.id
 }
