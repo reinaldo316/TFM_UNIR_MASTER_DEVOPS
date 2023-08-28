@@ -1,7 +1,4 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: CI / CD DEVOPS Development
+name: CI DEVOPS Development
 
 on:
   push:
@@ -35,20 +32,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/setup-go@v4
+      with:
+        go-version: 1.21
+    - uses: actions/checkout@v3
     - name: Instalar terraform
       uses: hashicorp/setup-terraform@v2
+    - name: Download Go Modules
+      working-directory: tfmtest/test
+      run: go mod download
+    - name: Run Go Tests
+      working-directory: tfmtest/test
+      run: go test -v -tags=unit
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v1
       with: 
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
-    - name: terraform init
-      run: terraform init
-    - name: terraform validate
-      run: terraform validate
-    - name: terraform plan
-      run: terraform plan
+
   TERRFORM_VALIDATE_PLAN:
     name: Terraform validacion y terrform plan
     needs: [SEGURIDAD, COSTOS]

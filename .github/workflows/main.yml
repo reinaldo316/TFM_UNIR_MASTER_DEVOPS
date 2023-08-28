@@ -1,4 +1,4 @@
-name: CI / CD DEVOPS Development
+name: CD DEVOPS PROD
 
 on:
   push:

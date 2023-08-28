@@ -1,9 +1,9 @@
 module test
 
-go 1.20
+go 1.21.0
 
 require (
-	github.com/gruntwork-io/terratest v0.43.12
+	github.com/gruntwork-io/terratest v0.43.13
 	github.com/stretchr/testify v1.8.4
 )
 
