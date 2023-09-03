@@ -48,6 +48,14 @@ jobs:
     - name: Download Go Modules
       working-directory: tfmtest/test
       run: go mod download
+    - name: Run script file
+      run: |
+         pwd
+         cd tfmtest/test
+         pwd
+         ls
+         go test -v integration_test.go
+      shell: bash
     - name: Run Go Tests
       working-directory: tfmtest/test
       run: go test -v integration_test.go
