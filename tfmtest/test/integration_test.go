@@ -1,6 +1,9 @@
 package test
 
 import (
+	"fmt"
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -9,9 +12,15 @@ import (
 
 func TestInfrastructure(t *testing.T) {
 	t.Parallel()
-
+	ex, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	exPath2 := filepath.Dir(exPath)
+	fmt.Println(exPath2)
 	// Directorio del módulo Terraform
-	terraformDir := "/home/reinaldo316/Desktop/TFM_UNIR_MASTER_DEVOPS/"
+	terraformDir := exPath2
 
 	// Variables para la prueba
 	//awsRegion := "us-east-1"
@@ -85,5 +94,4 @@ func TestInfrastructure(t *testing.T) {
 	// Limpiar los recursos al finalizar la prueba
 	defer terraform.Destroy(t, terraformOptions)
 
-	// También puedes realizar más verificaciones sobre los recursos creados si es necesario
 }

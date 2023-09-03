@@ -1,6 +1,9 @@
 package test
 
 import (
+	"fmt"
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -9,9 +12,15 @@ import (
 
 func TestVariables(t *testing.T) {
 	t.Parallel()
-
+	ex, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+	exPath2 := filepath.Dir(exPath)
+	fmt.Println(exPath2)
 	// Directorio del módulo Terraform
-	terraformDir := "/ruta/a/tu/directorio/terraform/"
+	terraformDir := exPath2
 
 	// Variables para la prueba
 	awsProfileName := "default"

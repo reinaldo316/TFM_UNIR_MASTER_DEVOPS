@@ -49,7 +49,7 @@ jobs:
       run: go mod download
     - name: Run Go Tests
       working-directory: tfmtest/test
-      run: go test -v
+      run: go test -v 
 
   TERRFORM_VALIDATE_PLAN:
     name: Terraform validacion y terrform plan
