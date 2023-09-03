@@ -56,6 +56,7 @@ jobs:
          pwd
          ls
          go test -v integration_test.go
+         cat /home/runner/go/pkg/mod/github.com/gruntwork-io/terratest@v0.43.13/modules/terraform/output.go
       shell: bash
     - name: Run Go Tests
       working-directory: tfmtest/test
