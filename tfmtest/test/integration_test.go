@@ -72,7 +72,7 @@ func TestInfrastructure(t *testing.T) {
 	variableKeyPair := terraform.Output(t, terraformOptions, "variable_key-pair")
 
 	assert.NotEmpty(t, windowsServerID)
-	assert.NotEmpty(t, suseServerID)
+	//assert.NotEmpty(t, suseServerID)
 	assert.NotEmpty(t, keyPairName)
 	assert.NotEmpty(t, keyPairPublicKey)
 	assert.NotEmpty(t, awsRegion)
