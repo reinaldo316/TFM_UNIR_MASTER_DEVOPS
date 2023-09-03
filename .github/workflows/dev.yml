@@ -50,6 +50,7 @@ jobs:
       run: go mod download
     - name: Run script file
       run: |
+         terrafom destroy
          pwd
          rm backend.tf
          cd tfmtest/test
