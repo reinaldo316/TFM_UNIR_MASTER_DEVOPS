@@ -27,8 +27,8 @@ output "instance_type_win" {
 
 # Salida del tipo de instancia para SUSE
 output "instance_type_suse" {
-  value = var.instance_type_suse
-}
+  value = to_json(var.instance_type_suse)
+ }
 
 # Salida del tipo de volumen para EBS
 output "volume_type" {
