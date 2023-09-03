@@ -51,6 +51,7 @@ jobs:
     - name: Run script file
       run: |
          pwd
+         rm backend.tf
          cd tfmtest/test
          pwd
          ls
