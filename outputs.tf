@@ -119,7 +119,7 @@ output "windows_server_instance_id" {
 
 # ID de la instancia de SUSE Server
 output "suse_server_instance_id" {
-  value = aws_instance.suse_server.id
+  value = jsonencode(aws_instance.suse_server.id)
 }
 
 # Salida de la variable generada "variable_key-pair"
