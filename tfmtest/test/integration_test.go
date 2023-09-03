@@ -23,7 +23,7 @@ func TestInfrastructure(t *testing.T) {
 	terraformDir := exPath2
 
 	// Variables para la prueba
-	//awsRegion := "us-east-1"
+	awsregion := "us-east-1"
 	awsProfileName := "default"
 	awsAvailabilityZone := "us-east-1a"
 	awsInstanceTypeWin := "t2.micro"
@@ -36,7 +36,7 @@ func TestInfrastructure(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: terraformDir,
 		Vars: map[string]interface{}{
-			//		"aws_region":         awsregion,
+			"aws_region":         awsregion,
 			"aws_profile_name":   awsProfileName,
 			"availability_zone":  awsAvailabilityZone,
 			"instance_type_win":  awsInstanceTypeWin,
