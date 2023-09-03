@@ -26,7 +26,7 @@ jobs:
         api-key: ${{ secrets.INFRACOST_API_KEY }}
     - name: generate infracost estimate
       run: infracost breakdown --path=.
-  TEST:
+  UNITTEST:
     name: Terraform Test
     needs: [SEGURIDAD, COSTOS]
     runs-on: ubuntu-latest
@@ -49,11 +49,36 @@ jobs:
       run: go mod download
     - name: Run Go Tests
       working-directory: tfmtest/test
-      run: go test -v 
+      run: go test -v unit_test.go
+  
+  INTEGRATIONTEST:
+    name: Terraform integration Test
+    needs: [UNITTEST]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v4
+      with:
+        go-version: 1.21
+    - uses: actions/checkout@v3
+    - name: Instalar terraform
+      uses: hashicorp/setup-terraform@v2
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with: 
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Download Go Modules
+      working-directory: tfmtest/test
+      run: go mod download
+    - name: Run Go Tests
+      working-directory: tfmtest/test
+      run: go test -v integration_test.go
 
   TERRFORM_VALIDATE_PLAN:
     name: Terraform validacion y terrform plan
-    needs: [SEGURIDAD, COSTOS]
+    needs: [INTEGRATIONTEST]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
