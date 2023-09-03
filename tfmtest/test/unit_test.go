@@ -24,10 +24,10 @@ func TestVariables(t *testing.T) {
 
 	// Variables para la prueba
 	awsProfileName := "default"
-	awsRegion := "us-east-2"
-	availabilityZone := "us-west-2a"
-	instanceTypeWin := "t2.medium"
-	instanceTypeSuse := "m5.large"
+	awsRegion := "us-east-1"
+	availabilityZone := "us-east-1a"
+	instanceTypeWin := "t2.micro"
+	instanceTypeSuse := "t2.large"
 	volumeType := "gp2"
 	volumeSizeWin := "50"
 	volumeSizeSuse := "500"
