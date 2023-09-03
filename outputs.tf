@@ -6,9 +6,9 @@ output "key_pair_name" {
 }
 
 # Salida de la clave pública del par de claves
-output "key_pair_public_key" {
-  value = aws_key_pair.key_pair.public_key
-}
+#output "key_pair_public_key" {
+ # value = aws_key_pair.key_pair.public_key
+#}
 
 # Salida del nombre del perfil de usuario de AWS
 output "aws_profile_name" {
