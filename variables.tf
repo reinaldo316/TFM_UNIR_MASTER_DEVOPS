@@ -19,13 +19,13 @@ variable "availability_zone" {
 # Variable que contiene el tipo de instancia de AWS para Windows
 variable "instance_type_win" {
   description = "Tipo de instancia para EC2 (Windows)"
-  default   =  "t2.micro"
+  default   =  "t2.xlarge"
 }
 
 # Variable que contiene el tipo de instancia de AWS para SUSE
 variable "instance_type_suse" {
   description = "Tipo de instancia para EC2 (SUSE)"
-  default   =  "t2.large"
+  default   =  "m4.4xlarge"
 }
 
 # Variable que contiene el tipo de volumen para EBS
@@ -39,15 +39,16 @@ variable "volume_type" {
 variable "volume_size_win" {
   description = "Tamaño del volumen para Windows"
   type        = string
-  default     = "35"
+  default     = "300"
 }
 
 # Variable que contiene el tamaño del volumen para SUSE
 variable "volume_size_suse" {
   description = "Tamaño del volumen para SUSE"
   type        = string
-  default     = "300"
+  default     = "100"
 }
+
 
 
 

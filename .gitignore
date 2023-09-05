@@ -38,3 +38,5 @@ terraform-prueba-windows-us-east-1.pem
 optionally-radically-hugely-locally-similarly-thoroughly-arguably-ideally-clear-lamprey-windows-us-east-1.pem
 .terraform.lock.hcl
 .infracost/terraform_modules/manifest.json
+sudo apt update && sudo apt install terraform
+.infracost/pricing.gob
