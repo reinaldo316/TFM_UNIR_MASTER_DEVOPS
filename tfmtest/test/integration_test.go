@@ -1,6 +1,7 @@
 package test
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -45,6 +46,7 @@ func TestInfrastructure(t *testing.T) {
 			"volume_size_win":    volumeSizeWin,
 			"volume_size_suse":   volumeSizeSuse,
 		},
+		NoColor: true,
 	}
 
 	// Ejecutar 'terraform init' y 'terraform apply' en el directorio del módulo Terraform
@@ -70,6 +72,20 @@ func TestInfrastructure(t *testing.T) {
 	windowsServerInstanceID := terraform.Output(t, terraformOptions, "windows_server_instance_id")
 	suseServerInstanceID := terraform.Output(t, terraformOptions, "suse_server_instance_id")
 	variableKeyPair := terraform.Output(t, terraformOptions, "variable_key-pair")
+
+	// Validar que las salidas sean JSON válidos antes de analizarlas
+	var windowsServerIDJSON map[string]interface{}
+	var suseServerIDJSON map[string]interface{}
+
+	if err := json.Unmarshal([]byte(windowsServerID), &windowsServerIDJSON); err != nil {
+		t.Fatalf("Error al analizar la salida de windows_server_instance_id como JSON: %s", err)
+	}
+
+	if err := json.Unmarshal([]byte(suseServerID), &suseServerIDJSON); err != nil {
+		t.Fatalf("Error al analizar la salida de suse_server_instance_id como JSON: %s", err)
+	}
+
+	// Ahora puedes acceder a los valores de las salidas como objetos JSON válidos si es necesario
 
 	assert.NotEmpty(t, windowsServerID)
 	assert.NotEmpty(t, suseServerID)
