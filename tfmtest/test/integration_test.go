@@ -1,7 +1,6 @@
 package test
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -55,35 +54,23 @@ func TestInfrastructure(t *testing.T) {
 	// prueba que asegura que las instancias de AWS se hayan creado correctamente
 	windowsServerID := terraform.OutputJson(t, terraformOptions, "windows_server_instance_id")
 	suseServerID := terraform.OutputJson(t, terraformOptions, "suse_server_instance_id")
-	keyPairName := terraform.Output(t, terraformOptions, "key_pair_name")
+	keyPairName := terraform.OutputJson(t, terraformOptions, "key_pair_name")
 	//keyPairPublicKey := terraform.Output(t, terraformOptions, "key_pair_public_key")
-	awsRegion := terraform.Output(t, terraformOptions, "aws_region")
-	instanceTypeWin := terraform.Output(t, terraformOptions, "instance_type_win")
-	instanceTypeSuse := terraform.Output(t, terraformOptions, "instance_type_suse")
-	securityGroupNameSuse := terraform.Output(t, terraformOptions, "security_group_name_suse")
-	securityGroupDescriptionSuse := terraform.Output(t, terraformOptions, "security_group_description_suse")
-	securityGroupNameWinserv := terraform.Output(t, terraformOptions, "security_group_name_winserv")
-	securityGroupDescriptionWinserv := terraform.Output(t, terraformOptions, "security_group_description_winserv")
-	amiSuseServer := terraform.Output(t, terraformOptions, "ami_suse_server")
-	amiWindows2022 := terraform.Output(t, terraformOptions, "ami_windows_2022")
-	vpcID := terraform.Output(t, terraformOptions, "vpc_id")
-	subnetIDSuse := terraform.Output(t, terraformOptions, "subnet_id_suse")
-	subnetIDWinserv := terraform.Output(t, terraformOptions, "subnet_id_winserv")
-	windowsServerInstanceID := terraform.Output(t, terraformOptions, "windows_server_instance_id")
-	suseServerInstanceID := terraform.Output(t, terraformOptions, "suse_server_instance_id")
-	variableKeyPair := terraform.Output(t, terraformOptions, "variable_key-pair")
-
-	// Validar que las salidas sean JSON válidos antes de analizarlas
-	var windowsServerIDJSON map[string]interface{}
-	var suseServerIDJSON map[string]interface{}
-
-	if err := json.Unmarshal([]byte(windowsServerID), &windowsServerIDJSON); err != nil {
-		t.Fatalf("Error al analizar la salida de windows_server_instance_id como JSON: %s", err)
-	}
-
-	if err := json.Unmarshal([]byte(suseServerID), &suseServerIDJSON); err != nil {
-		t.Fatalf("Error al analizar la salida de suse_server_instance_id como JSON: %s", err)
-	}
+	awsRegion := terraform.OutputJson(t, terraformOptions, "aws_region")
+	instanceTypeWin := terraform.OutputJson(t, terraformOptions, "instance_type_win")
+	instanceTypeSuse := terraform.OutputJson(t, terraformOptions, "instance_type_suse")
+	securityGroupNameSuse := terraform.OutputJson(t, terraformOptions, "security_group_name_suse")
+	securityGroupDescriptionSuse := terraform.OutputJson(t, terraformOptions, "security_group_description_suse")
+	securityGroupNameWinserv := terraform.OutputJson(t, terraformOptions, "security_group_name_winserv")
+	securityGroupDescriptionWinserv := terraform.OutputJson(t, terraformOptions, "security_group_description_winserv")
+	amiSuseServer := terraform.OutputJson(t, terraformOptions, "ami_suse_server")
+	amiWindows2022 := terraform.OutputJson(t, terraformOptions, "ami_windows_2022")
+	vpcID := terraform.OutputJson(t, terraformOptions, "vpc_id")
+	subnetIDSuse := terraform.OutputJson(t, terraformOptions, "subnet_id_suse")
+	subnetIDWinserv := terraform.OutputJson(t, terraformOptions, "subnet_id_winserv")
+	windowsServerInstanceID := terraform.OutputJson(t, terraformOptions, "windows_server_instance_id")
+	suseServerInstanceID := terraform.OutputJson(t, terraformOptions, "suse_server_instance_id")
+	variableKeyPair := terraform.OutputJson(t, terraformOptions, "variable_key-pair")
 
 	// Ahora puedes acceder a los valores de las salidas como objetos JSON válidos si es necesario
 
