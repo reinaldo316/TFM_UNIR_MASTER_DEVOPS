@@ -42,7 +42,8 @@ resource "aws_instance" "windows_server" {
     EOF
     
   tags = {
-    "Name" = "WIN Server"
+    "Name" = "Windows-Server"
+    "Rol"  = "Servidor-Aplicaciones"
   }
 }
 
@@ -122,7 +123,7 @@ resource "aws_instance" "suse_server" {
     mount /dev/md2 /
     EOF
   tags = {
-    "Name" = "SUSE Server"
+    "Name" = "SUSE-Server"
   }
 }
 

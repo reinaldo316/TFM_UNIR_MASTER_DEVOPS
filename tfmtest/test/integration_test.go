@@ -52,7 +52,7 @@ func TestInfrastructure(t *testing.T) {
 
 	// prueba que asegura que las instancias de AWS se hayan creado correctamente
 	windowsServerID := terraform.Output(t, terraformOptions, "windows_server_instance_id")
-	//suseServerID := terraform.Output(t, terraformOptions, "suse_server_instance_id")
+	suseServerID := terraform.Output(t, terraformOptions, "suse_server_instance_id")
 	keyPairName := terraform.Output(t, terraformOptions, "key_pair_name")
 	//keyPairPublicKey := terraform.Output(t, terraformOptions, "key_pair_public_key")
 	awsRegion := terraform.Output(t, terraformOptions, "aws_region")
@@ -72,7 +72,7 @@ func TestInfrastructure(t *testing.T) {
 	variableKeyPair := terraform.Output(t, terraformOptions, "variable_key-pair")
 
 	assert.NotEmpty(t, windowsServerID)
-	//assert.NotEmpty(t, suseServerID)
+	assert.NotEmpty(t, suseServerID)
 	assert.NotEmpty(t, keyPairName)
 	//assert.NotEmpty(t, keyPairPublicKey)
 	assert.NotEmpty(t, awsRegion)
