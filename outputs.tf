@@ -67,13 +67,13 @@ output "security_group_description_winserv" {
   value = aws_security_group.security_group_winserv.description
 }
 
-output "security_group_suse_ingress_rules" {
-  value = aws_security_group.security_group_suse.ingress
-}
+#output "security_group_suse_ingress_rules" {
+ # value = aws_security_group.security_group_suse.ingress
+#}
 
-output "security_group_winserv_ingress_rules" {
-  value = aws_security_group.security_group_winserv.ingress
-}
+#output "security_group_winserv_ingress_rules" {
+#  value = aws_security_group.security_group_winserv.ingress
+#}
 
 
 # Salidas para IDs de recursos creados
