@@ -53,8 +53,8 @@ func TestInfrastructure(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// prueba que asegura que las instancias de AWS se hayan creado correctamente
-	windowsServerID := terraform.Output(t, terraformOptions, "windows_server_instance_id")
-	suseServerID := terraform.Output(t, terraformOptions, "suse_server_instance_id")
+	windowsServerID := terraform.OutputJson(t, terraformOptions, "windows_server_instance_id")
+	suseServerID := terraform.OutputJson(t, terraformOptions, "suse_server_instance_id")
 	keyPairName := terraform.Output(t, terraformOptions, "key_pair_name")
 	//keyPairPublicKey := terraform.Output(t, terraformOptions, "key_pair_public_key")
 	awsRegion := terraform.Output(t, terraformOptions, "aws_region")
