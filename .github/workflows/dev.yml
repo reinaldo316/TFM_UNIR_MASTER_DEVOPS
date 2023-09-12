@@ -28,7 +28,7 @@ jobs:
       run: infracost breakdown --path=.
  
   UNITTEST:
-    name: Terraform integration Test
+    name: Terraform unit Test
     needs: [COSTOS]
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +45,12 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
+    - name: terraform init
+      run: terraform init
+    - name: terraform validate
+      run: terraform validate
+    - name: terraform plan
+      run: terraform plan --out plan.out
     - name: Download Go Modules
       working-directory: tfmtest/test
       run: go mod download
