@@ -45,11 +45,9 @@ func TestUnitInfrastructure(t *testing.T) {
 			"volume_size_suse":   volumeSizeSuse,
 		},
 
-		PlanFilePath: ".terraform/plan",
+		PlanFilePath: "./plan",
 		NoColor:      true,
 	}
-
-	//terraform.Plan(t, terraformOptions)
 
 	// Ejecutar 'terraform init', 'terraform plan' y 'terraform show' con las opciones dadas, y parsear el resultado JSON en una estructura Go
 	plan, err := terraform.InitAndPlanAndShowWithStructE(t, terraformOptions)
@@ -57,7 +55,6 @@ func TestUnitInfrastructure(t *testing.T) {
 		t.Errorf("Error running terraform: %s", err)
 	}
 	//value := plan.RawPlan.Variables["aws_instance.windows_server"]
-
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.windows_server")
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_key_pair.key_pair")
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_security_group.security_group_suse")
