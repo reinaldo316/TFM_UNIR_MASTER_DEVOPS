@@ -27,7 +27,7 @@ jobs:
     - name: generate infracost estimate
       run: infracost breakdown --path=.
  
-  INTEGRATIONTEST:
+  UNITTEST:
     name: Terraform integration Test
     needs: [COSTOS]
     runs-on: ubuntu-latest
@@ -48,16 +48,32 @@ jobs:
     - name: Download Go Modules
       working-directory: tfmtest/test
       run: go mod download
-    - name: Run script file
-      run: |
-         pwd
-         rm backend.tf
-         cd tfmtest/test
-         pwd
-         ls
-         go test -v integration_test.go
-         cat /home/runner/go/pkg/mod/github.com/gruntwork-io/terratest@v0.43.13/modules/terraform/output.go
-      shell: bash
+    - name: Run Go Tests
+      working-directory: tfmtest/test
+      run: go test -v unit_test.go
+
+      
+  INTEGRATIONTEST:
+    name: Terraform integration Test
+    needs: [UNITTEST]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v3
+      with:
+        go-version: 1.21
+    - uses: actions/checkout@v3
+    - name: Instalar terraform
+      uses: hashicorp/setup-terraform@v2
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with: 
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Download Go Modules
+      working-directory: tfmtest/test
+      run: go mod download
     - name: Run Go Tests
       working-directory: tfmtest/test
       run: go test -v integration_test.go
