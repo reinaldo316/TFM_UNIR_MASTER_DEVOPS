@@ -52,7 +52,10 @@ func TestUnitInfrastructure(t *testing.T) {
 	//terraform.Plan(t, terraformOptions)
 
 	// Ejecutar 'terraform init', 'terraform plan' y 'terraform show' con las opciones dadas, y parsear el resultado JSON en una estructura Go
-	plan := terraform.InitAndPlanAndShowWithStruct(t, terraformOptions)
+	plan, err := terraform.InitAndPlanAndShowWithStructE(t, terraformOptions)
+	if err != nil {
+		t.Errorf("Error running terraform: %s", err)
+	}
 
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.windows_server")
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_key_pair.key_pair")
