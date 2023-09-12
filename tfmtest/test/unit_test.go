@@ -45,7 +45,7 @@ func TestUnitInfrastructure(t *testing.T) {
 			"volume_size_suse":   volumeSizeSuse,
 		},
 
-		PlanFilePath: "plan.out",
+		PlanFilePath: ".terraform/plan",
 		NoColor:      true,
 	}
 
@@ -56,6 +56,7 @@ func TestUnitInfrastructure(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error running terraform: %s", err)
 	}
+	//value := plan.RawPlan.Variables["aws_instance.windows_server"]
 
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.windows_server")
 	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_key_pair.key_pair")
