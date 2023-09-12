@@ -63,5 +63,4 @@ func TestUnitInfrastructure(t *testing.T) {
 	assert.Contains(t, plan, "aws_route_table.route_table_windows")
 	assert.Contains(t, plan, "aws_instance.suse_server")
 	assert.Contains(t, plan, "aws_vpc.vpc")
-
 }
