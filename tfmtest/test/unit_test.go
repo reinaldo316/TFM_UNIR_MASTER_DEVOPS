@@ -53,19 +53,15 @@ func TestUnitInfrastructure(t *testing.T) {
 	// Ejecutar 'terraform init', 'terraform plan' y 'terraform show' con las opciones dadas, y parsear el resultado JSON en una estructura Go
 	plan := terraform.InitAndPlanAndShow(t, terraformOptions)
 	assert.Contains(t, plan, "aws_instance.windows_server")
-
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.windows_server")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_key_pair.key_pair")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_security_group.security_group_suse")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_security_group.security_group_winserv")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_internet_gateway.internet_gateway")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_subnet.subnet_windows")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_route_table.route_table_suse")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_route_table.route_table_windows")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.suse_server")
-	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_vpc.vpc")
-
-	// Limpiar los recursos al finalizar la prueba
-	defer terraform.Destroy(t, terraformOptions)
+	assert.Contains(t, plan, "aws_instance.windows_server")
+	assert.Contains(t, plan, "aws_key_pair.key_pair")
+	assert.Contains(t, plan, "aws_security_group.security_group_suse")
+	assert.Contains(t, plan, "aws_security_group.security_group_winserv")
+	assert.Contains(t, plan, "aws_internet_gateway.internet_gateway")
+	assert.Contains(t, plan, "aws_subnet.subnet_windows")
+	assert.Contains(t, plan, "aws_route_table.route_table_suse")
+	assert.Contains(t, plan, "aws_route_table.route_table_windows")
+	assert.Contains(t, plan, "aws_instance.suse_server")
+	assert.Contains(t, plan, "aws_vpc.vpc")
 
 }
