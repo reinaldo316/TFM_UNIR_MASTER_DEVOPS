@@ -5,15 +5,17 @@ Este prototipo se utiliza específicamente para facilitar la actualización de v
 ## Documentación para la Automatización de Creación de Ambientes de Prueba con IaaS para el procedimiento de actualización de versiones del ERP SAP Business One 
 
 ### Introducción
-El prototipo de Infraestructura como Servicio (IaaS) permite automatizar la creación de entornos de prueba en la nube que serán ocupados para el procedimiento de actualización de versiones del ERP SAP Business One, El prototipo se basa en la automatización de Terraform para definir la infraestructura y en GitHub Actions para implementar un proceso de Integración Continua y Entrega Continua (CI/CD). Esta documentación proporciona una guía básica para comenzar a utilizar el prototipo y aprovechar sus capacidades de forma eficiente.
+El prototipo de Infraestructura como Servicio (IaaS) permite automatizar la creación de entornos de prueba en la nube que serán ocupados para el procedimiento de actualización de versiones del ERP SAP Business One, El prototipo se basa en la automatización de Terraform para definir la infraestructura y en GitHub Actions para implementar un proceso de Integración Continua y Entrega Continua (CI/CD). 
+
+>Esta documentación proporciona una guía básica para comenzar a utilizar el prototipo y aprovechar sus capacidades de forma eficiente.
 
 ### Requisitos Previos
-- <Una cuenta en GitHub.
-- <Cuenta en el proveedor de nube (AWS).
-- <Acceso a las credenciales y claves de acceso a la nube(AWS).
-- <Conocimientos básicos sobre Git y GitHub Actions.
-- <Conocimientos básicos sobre infraestructura en la nube y terminología asociada.
-- <Conocimientos básicos sobre infraestructura como codigo en Terraform.
+- Una cuenta en GitHub.
+- Cuenta en el proveedor de nube (AWS).
+- Acceso a las credenciales y claves de acceso a la nube(AWS).
+- Conocimientos básicos sobre Git y GitHub Actions.
+- Conocimientos básicos sobre infraestructura en la nube y terminología asociada.
+- Conocimientos básicos sobre infraestructura como codigo en Terraform.
 
 ### Pasos para levantar la infraestructura de manera local modificando las variables
 A continuación, se describen los pasos para utilizar el prototipo de IaaS:
@@ -30,11 +32,79 @@ Configura las credenciales en tu entorno local, ya que el código en terraform b
 aws configure
 ```
 Este comando al ejecutarlo en la terminal les solicitara las siguientes credenciales:
+
 - AWS Access Key ID
 - AWS Secret Access Key
+
 Esto es importante si van a realizar pruebas de manera local este comando funcionara siempre y cuando tengan instalado el CLI de AWS en caso de no tenerlo favor revisar el siguiente link:
 ```sh
 https://docs.aws.amazon.com/es_es/cli/latest/userguide/cli-chap-configure.html
 ```
+- [Paso 3:] Configurar Variables
 
+En el directorio del proyecto, encuentra el archivo de variables (variables.tf).
+Ajusta los valores de las variables según tus necesidades. En ese archivo podrás configurar lo siguiente:
+
+- Perfil de usuario default de AWS
+```sh
+Ejemplo:   default     =     "my-perfil"
+```
+- Región default de AWS
+```sh
+Ejemplo:   default     =     " us-west-1"
+```
+- Zona de disponibilidad
+```sh
+Ejemplo:   default     =     "us-west-1b"
+```
+- Tipo de instancia de AWS para Windows
+```sh
+Ejemplo:   default     =     "t2.micro"
+```
+- Tipo de instancia de AWS para SUSE
+```sh
+Ejemplo:   default     =     "t2.large"
+```
+- Tipo de volumen para EBS
+```sh
+Ejemplo:   default     =     "gp2"
+```
+- Tamaño del volumen para Windows
+```sh
+Ejemplo:   default     =     "100"
+```
+- Tamaño del volumen para SUSE
+```sh
+Ejemplo:   default     =     "100"
+```
+- [Paso 4:] Ejecutar Terraform
+
+Abre una terminal y navega al directorio del proyecto.
+
+Inicializa el directorio de trabajo de Terraform con el siguiente comando:
+```sh
+terraform init
+```
+Inicializa la verificación del código de Terraform con el siguiente comando:
+```sh
+terraform validate
+```
+Ejecutar el plan de Terraform con el siguiente comando, para ver que recursos se crearan:
+```sh
+terraform plan
+```
+Si la validacion y la planificación se ve bien, ejecuta el comando para crear la infraestructura:
+```sh
+terraform apply
+```
+- [Paso 5:] Verificar y Explorar la Infraestructura
+
+Después de que terraform apply se complete con éxito, se podrá verifica en el proveedor de nube (AWS) la creación que los recursos y se podrá navegar por la infraestructura.
+
+- [Paso 6:] Destruir la Infraestructura
+
+Si ya se terminó de usar la infraestructura, ejecuta el siguiente comando para eliminarla:
+```sh
+terraform destroy
+```
 
