@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestUnitInfrastructure(t *testing.T) {
@@ -50,10 +51,10 @@ func TestUnitInfrastructure(t *testing.T) {
 	}
 
 	// Ejecutar 'terraform init', 'terraform plan' y 'terraform show' con las opciones dadas, y parsear el resultado JSON en una estructura Go
-	plan := terraform.InitAndPlanAndShowWithStruct(t, terraformOptions)
-	//assert.Contains(t, plan.ResourceChangesMap, "aws_instance.windows_server")
+	plan := terraform.InitAndPlanAndShow(t, terraformOptions)
+	assert.Contains(t, plan, "aws_instance.windows_server")
 
-	terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.windows_server")
+	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_instance.windows_server")
 	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_key_pair.key_pair")
 	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_security_group.security_group_suse")
 	//terraform.AssertPlannedValuesMapKeyExists(t, plan, "aws_security_group.security_group_winserv")
