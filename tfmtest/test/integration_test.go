@@ -72,7 +72,7 @@ func TestInfrastructure(t *testing.T) {
 	suseServerInstanceID := terraform.OutputJson(t, terraformOptions, "suse_server_instance_id")
 	variableKeyPair := terraform.OutputJson(t, terraformOptions, "variable_key-pair")
 
-	// Ahora puedes acceder a los valores de las salidas como objetos JSON válidos si es necesario
+	// Se comprueba que elrecurso esta presente
 
 	assert.NotEmpty(t, windowsServerID)
 	assert.NotEmpty(t, suseServerID)
@@ -94,7 +94,7 @@ func TestInfrastructure(t *testing.T) {
 	assert.NotEmpty(t, suseServerInstanceID)
 	assert.NotEmpty(t, variableKeyPair)
 
-	// Limpiar los recursos al finalizar la prueba
+	// Limpia los recursos al finalizar la prueba
 	defer terraform.Destroy(t, terraformOptions)
 
 }

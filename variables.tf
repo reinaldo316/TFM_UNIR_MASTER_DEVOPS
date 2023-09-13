@@ -28,25 +28,32 @@ variable "instance_type_suse" {
   default   =  "m4.4xlarge"
 }
 
-# Variable que contiene el tipo de volumen para EBS
+# Variable que contiene el tipo de volumen para EBS Windows
 variable "volume_type" {
-  description = "Tipo de volumen para EBS"
+  description = "Tipo de volumen para EBS Windows"
   type        = string
   default     = "gp2"
+}
+
+# Variable que contiene el tipo de volumen para EBS SuSE
+variable "volume_type_SuSE" {
+  description = "Tipo de volumen para EBS SuSE"
+  type        = string
+  default     = "gp3"
 }
 
 # Variable que contiene el tamaño del volumen para Windows
 variable "volume_size_win" {
   description = "Tamaño del volumen para Windows"
   type        = string
-  default     = "300"
+  default     = "100"
 }
 
 # Variable que contiene el tamaño del volumen para SUSE
 variable "volume_size_suse" {
   description = "Tamaño del volumen para SUSE"
   type        = string
-  default     = "100"
+  default     = "900"
 }
 
 

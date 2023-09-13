@@ -9,7 +9,7 @@ resource "aws_security_group" "security_group_suse" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "Allow SSH traffic"
   }
 
@@ -70,16 +70,22 @@ resource "aws_security_group" "security_group_suse" {
     from_port   = 3389
     to_port     = 3389
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "Allow RDP traffic"
   }
-
+  # regl para habilitar ICMP
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "icmp" # Protocolo ICMP para ping
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   # Regla de salida permitida para cualquier puerto (egreso)
   egress {
     from_port   = 1
     to_port     = 65535
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "Allow outgoing traffic"
   }
 }
@@ -95,7 +101,7 @@ resource "aws_security_group" "security_group_winserv" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "Allow SSH traffic"
   }
 
@@ -159,6 +165,14 @@ resource "aws_security_group" "security_group_winserv" {
     description = "Allow RDP traffic from any IP"
   }
 
+  # regl para habilitar ICMP
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "icmp" # Protocolo ICMP para ping
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   # Regla de salida permitida para cualquier puerto (egreso)
   egress {
     from_port   = 1
@@ -166,7 +180,7 @@ resource "aws_security_group" "security_group_winserv" {
     protocol    = "tcp"
 
     # Restringir el tráfico de salida a direcciones IP dentro de la VPC
-    cidr_blocks = ["10.0.0.0/16"]
+    cidr_blocks = ["0.0.0.0/0"]
     description = "Allow outgoing traffic"
   }
 }

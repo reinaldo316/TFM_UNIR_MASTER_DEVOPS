@@ -25,19 +25,13 @@ resource "aws_subnet" "subnet_windows" {
 
 # Creación de una tabla de ruteo para SAP SUSE asociada a la VPC
 resource "aws_route_table" "route_table_suse" {
-  vpc_id = aws_vpc.vpc.id
+ vpc_id = aws_vpc.vpc.id
 
   # Ruta predeterminada para el tráfico saliente a través del Internet Gateway
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.internet_gateway.id
+     gateway_id = aws_internet_gateway.internet_gateway.id
   }
-}
-
-# Asociación de la tabla de ruteo de SAP SUSE con la subred correspondiente
-resource "aws_route_table_association" "route_table_association_suse" {
-  subnet_id = aws_subnet.subnet_suse.id
-  route_table_id = aws_route_table.route_table_suse.id
 }
 
 # Creación de una tabla de ruteo para Windows Server asociada a la VPC
@@ -56,3 +50,13 @@ resource "aws_route_table_association" "route_table_association_windows" {
   subnet_id = aws_subnet.subnet_windows.id
   route_table_id = aws_route_table.route_table_windows.id
 }
+# Asociación de la tabla de ruteo de SAP SUSE con la subred correspondiente
+resource "aws_route_table_association" "route_table_association_suse" {
+  subnet_id = aws_subnet.subnet_suse.id
+  route_table_id = aws_route_table.route_table_suse.id
+}
+
+
+
+
+

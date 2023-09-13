@@ -26,8 +26,7 @@ resource "aws_instance" "windows_server" {
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet_windows.id
   vpc_security_group_ids = [aws_security_group.security_group_winserv.id]
-
-  root_block_device {
+   root_block_device {
     volume_type           = var.volume_type
     volume_size           = var.volume_size_win
     delete_on_termination = false
@@ -55,73 +54,27 @@ resource "aws_instance" "suse_server" {
   key_name               = aws_key_pair.key_pair.key_name
   subnet_id              = aws_subnet.subnet_suse.id
   vpc_security_group_ids = [aws_security_group.security_group_suse.id]
-
+  associate_public_ip_address = true
   root_block_device {
-    volume_type           = var.volume_type
+    volume_type           = var.volume_type_SuSE
     volume_size           = var.volume_size_suse
-    delete_on_termination = false
-    encrypted             = true  # Encriptar el volumen EBS
-  }
-  
-  ebs_block_device {
-    device_name           = "/dev/sdf"
-    volume_type           = var.volume_type
-    volume_size           = var.volume_size_suse
-    delete_on_termination = false
-    encrypted             = true  # Encriptar el volumen EBS
-  }
-
-  ebs_block_device {
-    device_name           = "/dev/sdg"
-    volume_type           = var.volume_type
-    volume_size           = var.volume_size_suse
-    delete_on_termination = false
-    encrypted             = true  # Encriptar el volumen EBS
-  }
-  
-    ebs_block_device {
-    device_name           = "/dev/sdh"
-    volume_type           = var.volume_type
-    volume_size           = var.volume_size_suse
-    delete_on_termination = false
-    encrypted             = true  # Encriptar el volumen EBS
-  }
-
-  ebs_block_device {
-    device_name           = "/dev/sdi"
-    volume_type           = var.volume_type
-    volume_size           = var.volume_size_suse
-    delete_on_termination = false
-    encrypted             = true  # Encriptar el volumen EBS
-  }
-
-    ebs_block_device {
-    device_name           = "/dev/sdj"
-    volume_type           = var.volume_type
-    volume_size           = var.volume_size_suse
+    iops                  = 7000
     delete_on_termination = false
     encrypted             = true  # Encriptar el volumen EBS
   }
 
   user_data = <<-EOF
-    #!/bin/bash
-    # Configurar RAID 5 entre root block device, /dev/sdf y /dev/sdg
-    mdadm --create --verbose /dev/md0 --level=5 --raid-devices=3 /dev/xvda /dev/sdf /dev/sdg
-    mkfs.ext4 /dev/md0
-    echo '/dev/md0  /mnt/raid5_1  ext4  defaults,nofail  0  2' >> /etc/fstab
-    mount -a
+      #!/bin/bash
 
-    # Configurar RAID 5 entre /dev/sdh, /dev/sdj y /dev/sdk
-    mdadm --create --verbose /dev/md1 --level=5 --raid-devices=3 /dev/sdh /dev/sdj /dev/sdk
-    mkfs.ext4 /dev/md1
-    echo '/dev/md1  /mnt/raid5_2  ext4  defaults,nofail  0  2' >> /etc/fstab
-    mount -a
+      # Instala GNOME desktop environment
+      zypper install gnome-desktop
 
-    # Configurar RAID 0 entre /dev/md0 y /dev/md1 y asignarlo como disco raíz
-    mdadm --create --verbose /dev/md2 --level=0 --raid-devices=2 /dev/md0 /dev/md1
-    mkfs.ext4 /dev/md2
-    mount /dev/md2 /
-    EOF
+      #Habilita  GNOME desktop environment
+      systemctl enable gdm.service
+
+      # Reinicia el sistema
+      systemctl reboot
+     EOF  
   tags = {
     "Name" = "SUSE-Server"
   }
